@@ -1,0 +1,6 @@
+{
+  "event_id": "05bfd32a-4150-42ac-ab2b-40c6326ec7ca-0",
+  "timestamp": "2022-12-27T20:37:47.938031Z",
+  "event_type": "providers/cloud.firestore/eventTypes/document.write",
+  "resource": "projects/<project_id>/databases/(default)/documents/texts/<text_id>"
+}

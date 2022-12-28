@@ -1,0 +1,11 @@
+# python environment
+venv
+/venv
+
+# firebase
+firebase-config.*
+service-account-key.*
+
+# environemnt variables
+.env 
+deployment.*

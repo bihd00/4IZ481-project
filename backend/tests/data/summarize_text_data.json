@@ -1,0 +1,16 @@
+{
+  "oldValue": {},
+  "updateMask": {},
+  "value": {
+    "createTime": "2022-12-27T20:37:47.938031Z",
+    "fields": {
+      "content": {
+        "stringValue": "Bicycle, bicycle, bicycle\nI want to ride my bicycle, bicycle, bicycle\nI want to ride my bicycle\nI want to ride my bike\nI want to ride my bicycle\nI want to ride it where I like\nYou say black, I say white\nYou say bark, I say bite\nYou say shark, I say hey man\nJaws was never my scene\nAnd I don't like Star Wars\nYou say Rolls, I say Royce\nYou say God give me a choice\nYou say Lord, I say Christ\nI don't believe in Peter Pan\nFrankenstein or Superman\nAll I wanna do is\nBicycle, bicycle, bicycle\nI want to ride my bicycle, bicycle, bicycle\nI want to ride my bicycle\nI want to ride my bike\nI want to ride my bicycle\nI want to ride my bicycle, races are coming your way\nSo forget all your duties, oh yeah\nFat bottomed girls, they'll be riding today\nSo look out for those beauties, oh yeah\nOn your marks, get set, go\nBicycle race, bicycle race, bicycle race\nBicycle, bicycle, bicycle\nI want to ride my bicycle, bicycle, bicycle, bicycle\n(I want a) bicycle race\nYou say coke, I say 'caine\nYou say John, I say Wayne\nHot dog, I say cool it man\nI don't wanna be the President of America\nYou say smile, I say cheese\nCartier, I say please\nIncome tax, I say Jesus\nI don't wanna be a candidate\nFor Vietnam or Watergate\n'Cause all I want to do is\nBicycle, bicycle, bicycle\nI want to ride my bicycle, bicycle (c'mon), bicycle\nI want to ride my bicycle\nI want to ride my bike\nI want to ride my bicycle\nI want to ride it where I like"
+      },
+      "createdAt": { "stringValue": "2022-12-27T20:37:47.690Z" },
+      "refId": { "stringValue": "01GNAMWE1A0FB9BC5JM423S5H0" }
+    },
+    "name": "projects/<project-id>/databases/(default)/documents/texts/<text_if>",
+    "updateTime": "2022-12-27T20:37:47.938031Z"
+  }
+}
