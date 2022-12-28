@@ -5,7 +5,14 @@
   function closeModal() {
     modal.set(null);
   }
+  function handleWindowKeyDown(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      modal.set(null);
+    }
+  }
 </script>
+
+<svelte:window on:keydown={handleWindowKeyDown} />
 
 <div
   on:click={closeModal}
@@ -48,7 +55,6 @@
             dark:hover:text-white
             border border-solid border-slate-500"
           on:click={closeModal}
-          on:keydown
         >
           <svg
             aria-hidden="true"

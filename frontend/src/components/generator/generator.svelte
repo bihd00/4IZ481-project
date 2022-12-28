@@ -43,7 +43,7 @@
 
 <IfUser>
   <section
-    class="container mx-auto mt-8 flex flex-col items-center justify-center h-[76vh]"
+    class="container mx-auto mt-8 flex flex-col items-center justify-center h-[76vh] rounded-lg bg-zinc-900"
   >
     <div class="h-full w-full sm:h-2/3 sm:w-2/3 sm:mb-24 xl:w-1/2">
       <form
