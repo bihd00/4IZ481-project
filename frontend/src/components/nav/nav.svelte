@@ -5,7 +5,6 @@
   import Logo from "../../assets/logo.svg";
   import List from "../../assets/list.svg";
   import NavLinks from "./links.svelte";
-  import Modal from "./modal.svelte";
 
   const navigate = useNavigate();
   $: $user == null ? navigate("/") : navigate("/dashboard");
@@ -28,5 +27,4 @@
       <img src={List} alt="List" class="w-12 md:w-auto" />
     </button>
   </div>
-  <Modal />
 </nav>

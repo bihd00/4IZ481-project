@@ -6,6 +6,7 @@
   import Generator from "./pages/generator.svelte";
   import Home from "./pages/home.svelte";
   import Wrapper from "./components/ui/wrapper.svelte";
+  import NavModal from "./components/nav/modal.svelte";
 </script>
 
 <Router>
@@ -22,6 +23,7 @@
       </div>
       <ToastMessage />
       <SignIn />
+      <NavModal />
     </Wrapper>
   </main>
 </Router>
