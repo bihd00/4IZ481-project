@@ -1,8 +1,9 @@
 <script lang="ts">
-  import IfUser from "../users/if-user.svelte";
+  import { userData } from "../../stores/user";
   import { generator, type Generator } from "../../stores/generator";
   import { generateImages } from "../../services/firebase";
   import FileUploadButton from "../ui/file-upload-button.svelte";
+  import IfUser from "../users/if-user.svelte";
 
   let currentGenerator: Generator;
   let textEl: HTMLTextAreaElement;
@@ -42,6 +43,7 @@
   }
 
   $: images = currentGenerator?.images || [];
+  $: previousImages = $userData?.images || [];
   $: $generator, reset();
   $: buttonText = confirmation
     ? confirmation
@@ -54,13 +56,13 @@
 
 <IfUser>
   <section
-    class="container mx-auto mt-8 lg:h-[76vh] rounded-lg bg-zinc-900 p-4 flex flex-col items-stretch"
+    class="container mx-auto mt-4 rounded-lg lg:bg-zinc-900 lg:p-4 lg:h-[80vh] flex flex-col items-stretch"
   >
-    <h1 class="mb-4">Dashboard</h1>
-    <div class="lg:grid lg:grid-cols-4 lg:gap-4 lg:grid-rows-1 lg:h-full">
+    <h1 class="mb-4 text-3xl lg:text-4xl">Dashboard</h1>
+    <div class="lg:grid lg:grid-cols-4 lg:gap-4 lg:grid-rows-2 lg:h-full">
       <!--  -->
       <div
-        class="lg:pr-4 lg:border-r-2 lg:border-solid lg:border-zinc-800 mb-8 lg:mb-0"
+        class="lg:pr-4 lg:border-r-2 lg:border-solid lg:border-zinc-800 mb-8 lg:mb-0 lg:row-span-2"
       >
         <h2 class="text-2xl mb-2">Create</h2>
         <div class="mb-4">
@@ -87,9 +89,9 @@
         </form>
       </div>
       <!--  -->
-      <div class="lg:col-span-3">
+      <div class="mb-16 lg:mb-0 lg:col-span-3 lg:row-span-1">
         <h2 class="text-2xl mb-2">Results</h2>
-        <div class="flex columns-auto gap-8 flex-wrap">
+        <div class="flex columns-auto gap-4 flex-wrap">
           {#if images.length}
             {#each images as img, i}
               <img
@@ -99,7 +101,26 @@
               />
             {/each}
           {:else}
-            <p class="text-gray-500">...no results yet 😐</p>
+            <p class="text-gray-500">...</p>
+          {/if}
+        </div>
+      </div>
+      <!--  -->
+      <div class="lg:col-span-3 lg:row-span-1">
+        <h2 class="text-2xl mb-2">Previously Generated</h2>
+        <div
+          class="flex columns-auto gap-4 flex-nowrap max-w-full overflow-auto pb-4"
+        >
+          {#if previousImages.length}
+            {#each previousImages as img, i}
+              <img
+                id={`${img.refId}-img-${i}`}
+                src={img.url}
+                alt="Generated..."
+              />
+            {/each}
+          {:else}
+            <p class="text-gray-500">...</p>
           {/if}
         </div>
       </div>

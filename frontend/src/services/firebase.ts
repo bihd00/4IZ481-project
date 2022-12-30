@@ -86,13 +86,20 @@ export async function generateImages(text: string) {
   let unsubImages: () => void;
 
   try {
-    const docRef = await addDoc(collection(firestore, "texts"), newText);
+    await addDoc(collection(firestore, "texts"), newText);
     generator.set({ refId, text: newText });
-    unsubImages = onSnapshot(q, (querySnapshot) => {
+    unsubImages = onSnapshot(q, (snap) => {
       const images: Image[] = [];
-      querySnapshot.forEach((doc) => images.push(doc.data() as Image));
+      snap.forEach((doc) => images.push(doc.data() as Image));
       generator.update((g) => ({ ...g, images }));
     });
+
+    if (auth.currentUser) {
+      await addDoc(collection(firestore, "refs"), {
+        uid: auth.currentUser.uid,
+        refId,
+      });
+    }
   } catch (e) {
     toast.set({
       message: `Error adding document: ${e}`,
@@ -100,8 +107,6 @@ export async function generateImages(text: string) {
     });
     serverError = e.message;
   }
-
-  // unsubImages && unsubImages();
 
   return { res, serverError, unsubImages };
 }

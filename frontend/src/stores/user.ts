@@ -2,32 +2,11 @@ import { writable } from "svelte/store";
 import { auth } from "../services/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
+import type { Image } from "./generator";
 
 export interface UserData {
-  email?: string;
   uid?: string;
-  displayName?: string;
-  photoURL?: string;
-  joined?: number;
-  stripeCustomerId?: string;
-  discordId?: string;
-  is_pro?: boolean;
-  expires?: number;
-  enterprise?: boolean;
-  enterpriseOwner?: string;
-  pro_status?:
-    | "lifetime"
-    | "active"
-    | "past_due"
-    | "expiring"
-    | "canceled"
-    | "enterprise";
-  subscriptions?: {
-    [key: string]: string;
-  };
-  sentMail?: {
-    [key: string]: boolean;
-  };
+  images?: Image[];
 }
 
 export const user = writable<User>(null);
@@ -38,13 +17,41 @@ let unsubData: () => void;
 onAuthStateChanged(auth, async (appUser) => {
   user.set(appUser);
   if (appUser) {
-    const { doc, onSnapshot, getFirestore } = await import(
-      "firebase/firestore"
-    );
+    const {
+      getFirestore,
+      collection,
+      getDocs,
+      query,
+      where,
+      orderBy,
+      onSnapshot,
+      limit,
+    } = await import("firebase/firestore");
+
     const firestore = getFirestore();
-    const userRef = doc(firestore, `users/${appUser.uid}`);
-    unsubData = onSnapshot(userRef, (snap) => {
-      userData.set(snap.data() as UserData);
+
+    const uid = appUser.uid;
+    const userRefsQuery = query(
+      collection(firestore, "refs"),
+      where("uid", "==", uid)
+    );
+
+    unsubData = onSnapshot(userRefsQuery, async (snap) => {
+      const refIds: string[] = [];
+      snap.forEach((doc) => refIds.push(doc.data().refId));
+
+      const userImagesQuery = query(
+        collection(firestore, "images"),
+        where("refId", "in", refIds),
+        orderBy("createdAt", "desc"),
+        limit(8)
+      );
+
+      const images: Image[] = [];
+      const imageRefs = await getDocs(userImagesQuery);
+      imageRefs.forEach((doc) => images.push(doc.data() as Image));
+
+      userData.set({ uid, images });
     });
   } else {
     unsubData && unsubData();
