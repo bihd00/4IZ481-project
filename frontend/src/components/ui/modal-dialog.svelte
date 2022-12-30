@@ -16,26 +16,26 @@
 
 <div
   on:click={closeModal}
-  class="fixed top-0 left-0 w-full overflow-x-hidden overflow-y-auto md:inset-0 md:h-full z-50 flex  
+  class="fixed top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto md:inset-0 md:h-full z-50 flex  
     {$modal === name ? '' : 'hidden'}"
   aria-hidden="true"
   tabindex="-1"
 >
   <div
-    class="w-full h-full absolute top-0 left-0 inset-0 z-20 bg-gray-900 bg-opacity-50 dark:bg-opacity-80"
+    class="w-full h-full absolute top-0 left-0 inset-0 z-20 bg-gray-900 bg-opacity-50 bg-opacity-80"
   />
 
-  <div class="relative w-full h-full max-w-lg md:h-auto mx-auto my-auto">
+  <div class="relative w-full max-w-lg md:h-auto mx-auto my-auto px-4 lg:px-0">
     <!-- Modal content -->
     <div
       on:click|stopPropagation
       aria-hidden="true"
-      class="relative bg-white shadow dark:bg-gray-700 z-40
+      class="relative bg-white shadow bg-gray-700 z-40
       {$modal === name ? '' : 'hidden'}"
     >
       <!-- Modal header -->
       <div
-        class="flex items-start justify-between p-4 border-b dark:border-gray-600"
+        class="flex items-start justify-between p-4 border-b border-gray-600"
       >
         <h5 class="text-lg text-bold">{title}</h5>
         <button
@@ -51,8 +51,8 @@
             ml-auto 
             inline-flex 
             items-center 
-            dark:hover:bg-gray-600 
-            dark:hover:text-white
+            hover:bg-gray-600 
+            hover:text-white
             border border-solid border-slate-500"
           on:click={closeModal}
         >

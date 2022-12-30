@@ -30,7 +30,7 @@
   for="text-file"
   class="relative flex min-w-full justify-center gap-1 
          self-center items-center p-3 py-4 
-         bg-zinc-800 mb-2 hover:bg-neutral-700
+         bg-zinc-900 lg:bg-zinc-800 mb-2 hover:bg-neutral-700
          {isDragging && !isSet ? 'border-2 border-dotted border-white' : ''}"
 >
   <img src={FileUpload} alt="Upload a file..." />
