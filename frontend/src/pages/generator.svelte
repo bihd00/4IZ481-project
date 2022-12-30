@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { userData } from "../../stores/user";
-  import { generator, type Generator } from "../../stores/generator";
-  import { generateImages } from "../../services/firebase";
-  import FileUploadButton from "../ui/file-upload-button.svelte";
-  import IfUser from "../users/if-user.svelte";
+  import { userData } from "../stores/user";
+  import { generator, type Generator } from "../stores/generator";
+  import { generateImages } from "../services/firebase";
+  import FileUploadButton from "../components/ui/file-upload-button.svelte";
+  import IfUser from "../components/users/if-user.svelte";
 
   let currentGenerator: Generator;
   let textEl: HTMLTextAreaElement;
@@ -79,7 +79,7 @@
             name="text"
             id="text"
             rows="10"
-            class="mb-3 bg-zinc-900 border-2 border-solid border-zinc-700 p-2"
+            class="mb-4 bg-zinc-900 lg:border-2 lg:border-solid lg:border-zinc-700 p-2"
           />
           <div class="">
             <button class="bg-sky-400 px-8 py-2 text-black font-bold"

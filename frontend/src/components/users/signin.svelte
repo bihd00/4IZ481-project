@@ -4,8 +4,8 @@
   import ModalDialog from "../ui/modal-dialog.svelte";
   import { modal } from "../../stores/modal";
 
-  let isRegistering = false;
   let modalTitle: string;
+  $: isRegistering = $modal == null;
 
   function toggleTitle() {
     modalTitle = isRegistering ? "Register" : "Login";
@@ -16,10 +16,6 @@
     toggleTitle();
   }
 
-  modal.subscribe((v) => {
-    isRegistering = v == null;
-    toggleTitle();
-  });
 
   toggleTitle();
 </script>

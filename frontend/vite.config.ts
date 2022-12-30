@@ -8,4 +8,5 @@ export default defineConfig({
   css: {
     postcss,
   },
+  optimizeDeps: { exclude: ["svelte-navigator"] },
 });

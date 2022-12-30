@@ -37,7 +37,7 @@
       <div
         class="flex items-start justify-between p-4 border-b border-gray-600"
       >
-        <h5 class="text-lg text-bold">{title}</h5>
+        <h5 class="text-xl text-bold uppercase my-auto">{title}</h5>
         <button
           type="button"
           class="

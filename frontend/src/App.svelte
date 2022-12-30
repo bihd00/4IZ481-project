@@ -1,19 +1,27 @@
 <script lang="ts">
-  import Nav from "./components/ui/nav.svelte";
+  import { Router, Route } from "svelte-navigator";
+  import Nav from "./components/nav/nav.svelte";
   import ToastMessage from "./components/ui/toast-message.svelte";
   import SignIn from "./components/users/signin.svelte";
-  import SigninButton from "./components/users/signin-button.svelte";
-  import Generator from "./components/generator/generator.svelte";
+  import Generator from "./pages/generator.svelte";
+  import Home from "./pages/home.svelte";
   import Wrapper from "./components/ui/wrapper.svelte";
 </script>
 
-<main>
-  <Wrapper>
-    <Nav>
-      <SigninButton />
-    </Nav>
-    <Generator />
-    <ToastMessage />
-    <SignIn />
-  </Wrapper>
-</main>
+<Router>
+  <main>
+    <Wrapper>
+      <Nav />
+      <div>
+        <Route path="/" primary={false}>
+          <Home />
+        </Route>
+        <Route path="/dashboard" primary={false}>
+          <Generator />
+        </Route>
+      </div>
+      <ToastMessage />
+      <SignIn />
+    </Wrapper>
+  </main>
+</Router>
