@@ -3,7 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{svelte,js,ts}"], // for unused CSS,
   plugins: [],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'xs': '440px'
+      }
+    },
   },
   variants: {
     extend: {},

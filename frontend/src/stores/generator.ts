@@ -18,4 +18,9 @@ export interface Generator {
   images?: Image[];
 }
 
+export interface GeneratorPreview {
+  images?: Image[];
+}
+
 export const generator = writable<Generator>(null);
+export const preview = writable<GeneratorPreview>(null);

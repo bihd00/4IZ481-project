@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { toast } from "../stores/toast";
 import { modal } from "../stores/modal";
-import { generator, type Image } from "../stores/generator";
+import { generator, preview, type Image } from "../stores/generator";
 import { ulid } from "ulid";
 import {
   createUserWithEmailAndPassword,
@@ -109,4 +109,29 @@ export async function generateImages(text: string) {
   }
 
   return { res, serverError, unsubImages };
+}
+
+export async function getPreviewImages() {
+  const { getFirestore, collection, query, limit, orderBy, getDocs } =
+    await import("firebase/firestore");
+  let res: any, serverError: string;
+
+  const firestore = getFirestore();
+  const previewImagesQuery = query(
+    collection(firestore, "images"),
+    orderBy("createdAt", "desc"),
+    limit(10)
+  );
+
+  const images: Image[] = [];
+  try {
+    const docRefs = await getDocs(previewImagesQuery);
+    docRefs.forEach((doc) => images.push(doc.data() as Image));
+    res = images;
+    preview.set({ images });
+  } catch (err) {
+    serverError = err.message;
+  }
+
+  return { res, serverError };
 }
