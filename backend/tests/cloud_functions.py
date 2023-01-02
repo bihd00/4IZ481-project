@@ -160,9 +160,6 @@ def _add_img_url_via_to_gcs(image: Image, client: storage.Client = None) -> None
     """
     - Uploads a b64 encoded PNG image to google cloud storage.
     - Sets image.url to its uploaded location on GCS.
-        
-        returns:
-            public url (str)
     """
     if image.url:
         print('Image already contains url. Skipping')
