@@ -2,7 +2,7 @@ import { writable } from "svelte/store";
 import { auth } from "../services/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import type { User } from "firebase/auth";
-import type { Image } from "./generator";
+import type { Image, Ref } from "./generator";
 
 export interface UserData {
   uid?: string;
@@ -33,12 +33,15 @@ onAuthStateChanged(auth, async (appUser) => {
     const uid = appUser.uid;
     const userRefsQuery = query(
       collection(firestore, "refs"),
-      where("uid", "==", uid)
+      where("uid", "==", uid),
+      orderBy("createdAt", "desc"),
+      limit(8)
     );
 
     unsubData = onSnapshot(userRefsQuery, async (snap) => {
-      const refIds: string[] = [];
-      snap.forEach((doc) => refIds.push(doc.data().refId));
+      const refs: Ref[] = [];
+      snap.forEach((doc) => refs.push(doc.data() as Ref));
+      const refIds = refs.slice(0, 9).map((ref) => ref.refId);
 
       const userImagesQuery = query(
         collection(firestore, "images"),

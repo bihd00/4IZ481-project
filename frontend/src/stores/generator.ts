@@ -1,5 +1,11 @@
 import { writable } from "svelte/store";
 
+export interface Ref {
+  refId: string;
+  uid: string;
+  createdAt?: string;
+}
+
 export interface Text {
   refId: string;
   content: string;

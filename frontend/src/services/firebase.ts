@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { toast } from "../stores/toast";
 import { modal } from "../stores/modal";
-import { generator, preview, type Image } from "../stores/generator";
 import { ulid } from "ulid";
+import { generator, preview, type Image } from "../stores/generator";
 import {
   createUserWithEmailAndPassword,
   type UserCredential,
@@ -79,10 +79,10 @@ export async function generateImages(text: string) {
 
   const firestore = getFirestore();
   const refId = ulid();
-  const currentDt = () => new Date().toISOString();
+  const currentDt = new Date().toISOString();
   const q = query(collection(firestore, "images"), where("refId", "==", refId));
 
-  const newText = { refId, content: text, createdAt: currentDt() };
+  const newText = { refId, content: text, createdAt: currentDt };
   let unsubImages: () => void;
 
   try {
@@ -98,6 +98,7 @@ export async function generateImages(text: string) {
       await addDoc(collection(firestore, "refs"), {
         uid: auth.currentUser.uid,
         refId,
+        createdAt: currentDt,
       });
     }
   } catch (e) {
